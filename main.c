@@ -94,12 +94,12 @@ int main(int argc, char *argv)
 	while(doJob)                                                                                          	
 	{                                                                                                     	
 		                                                                                                  	
-		output_file = fopen("trash.txt", "a");                                                            	
+		//output_file = fopen("trash.txt", "a");                                                            	
 		scanf("%s\r\n", in_data);                                                                         	
 		// send data via udp socket ***************************************************
 		sendto(sock, (char *)in_data, strlen(in_data), 0, (struct sockaddr *)&addr, sizeof(addr));
-		fprintf(output_file, "%s\r\n", in_data);
-		fclose(output_file);                                                                              	
+		//fprintf(output_file, "%s\r\n", in_data);
+		//fclose(output_file);                                                                              	
                                                                                                           
 		counter++;                                                                                        	
 		//sleep(2);                                                                                       	
