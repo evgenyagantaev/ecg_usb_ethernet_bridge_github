@@ -86,20 +86,27 @@ int main(int argc, char *argv)
 	addr.sin_addr.s_addr = inet_addr("192.168.1.1");
                                                                                                           
 	FILE *output_file;                                                                                    	
-                                                                                                          
+    time_t current_time;
+	time(&current_time);
+	char output_file_name[64];
+	sprintf(output_file_name, "rzhdv_data/rzhdv_ecg_%ld.txt", current_time);
                                                                                                           
 	char in_data[128];                                                                                    	
 	int doJob = 1;                                                                                        	
 	int counter = 0;                                                                                      	
+	output_file = fopen(output_file_name, "a");                                                            	
 	while(doJob)                                                                                          	
 	{                                                                                                     	
 		                                                                                                  	
-		//output_file = fopen("trash.txt", "a");                                                            	
 		scanf("%s\r\n", in_data);                                                                         	
 		// send data via udp socket ***************************************************
 		sendto(sock, (char *)in_data, strlen(in_data), 0, (struct sockaddr *)&addr, sizeof(addr));
-		//fprintf(output_file, "%s\r\n", in_data);
-		//fclose(output_file);                                                                              	
+		fprintf(output_file, "%s\r\n", &(in_data[1]));
+		if(counter%250 == 0)
+		{
+			fclose(output_file);                                                                              	
+			output_file = fopen(output_file_name, "a");                                                            	
+		}
                                                                                                           
 		counter++;                                                                                        	
 		//sleep(2);                                                                                       	
