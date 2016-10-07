@@ -47,7 +47,7 @@ int main(int argc, char *argv)
 
 
 	short_sleep_interval.tv_sec = 0;
-	short_sleep_interval.tv_nsec = 5000000;   //5 msec 
+	short_sleep_interval.tv_nsec = 3000000;   //3 msec 
 	sleep_interval.tv_sec = 0;
 	sleep_interval.tv_nsec = 25000000;	// 25 mSec
 	long_sleep_interval.tv_sec = 0;
@@ -92,6 +92,8 @@ int main(int argc, char *argv)
 	sprintf(output_file_name, "rzhdv_data/rzhdv_ecg_%ld.txt", current_time);
                                                                                                           
 	char in_data[128];                                                                                    	
+	in_data[1] = 's';
+	in_data[2] = 0;
 	int doJob = 1;                                                                                        	
 	int counter = 0;                                                                                      	
 	output_file = fopen(output_file_name, "a");                                                            	
@@ -106,6 +108,7 @@ int main(int argc, char *argv)
 		    if(counter%250 == 0)
 		    {
 		    	fclose(output_file);                                                                          	
+				nanosleep(&short_sleep_interval, NULL);
 		    	output_file = fopen(output_file_name, "a");                                                        	
 		    }
                                                                                                               
