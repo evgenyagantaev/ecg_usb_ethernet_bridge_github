@@ -47,9 +47,9 @@ int main(int argc, char *argv)
 
 
 	short_sleep_interval.tv_sec = 0;
-	short_sleep_interval.tv_nsec = 500000;   // 
+	short_sleep_interval.tv_nsec = 5000000;   //5 msec 
 	sleep_interval.tv_sec = 0;
-	sleep_interval.tv_nsec = 24000000;	// 25 mSec
+	sleep_interval.tv_nsec = 25000000;	// 25 mSec
 	long_sleep_interval.tv_sec = 0;
 	long_sleep_interval.tv_nsec = 100000000;	// 100 mSec
 
@@ -98,18 +98,21 @@ int main(int argc, char *argv)
 	while(doJob)                                                                                          	
 	{                                                                                                     	
 		                                                                                                  	
-		scanf("%s\r\n", in_data);                                                                         	
-		// send data via udp socket ***************************************************
-		sendto(sock, (char *)in_data, strlen(in_data), 0, (struct sockaddr *)&addr, sizeof(addr));
-		fprintf(output_file, "%s\r\n", &(in_data[1]));
-		if(counter%250 == 0)
+		if(scanf("%s\r\n", in_data) > 0)
 		{
-			fclose(output_file);                                                                              	
-			output_file = fopen(output_file_name, "a");                                                            	
+			// send data via udp socket ***************************************************                   	
+		    sendto(sock, (char *)in_data, strlen(in_data), 0, (struct sockaddr *)&addr, sizeof(addr));
+		    fprintf(output_file, "%s\r\n", &(in_data[1]));
+		    if(counter%250 == 0)
+		    {
+		    	fclose(output_file);                                                                          	
+		    	output_file = fopen(output_file_name, "a");                                                        	
+		    }
+                                                                                                              
+			counter++;                                                                                        
 		}
-                                                                                                          
-		counter++;                                                                                        	
-		//sleep(2);                                                                                       	
+		else
+			nanosleep(&short_sleep_interval, NULL);
                                                                                                           
 	}// end while (main loop)                                                                             	
                                                                                                           
