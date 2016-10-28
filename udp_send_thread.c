@@ -28,7 +28,7 @@ void *udp_send_thread(void *param)
 	//addr.sin_addr.s_addr = inet_addr("192.168.173.2");
 	//addr.sin_addr.s_addr = inet_addr("192.168.1.1");
 	//addr.sin_addr.s_addr = inet_addr("192.168.1.3");
-	addr.sin_addr.s_addr = inet_addr("192.168.0.89");
+	addr.sin_addr.s_addr = inet_addr("192.168.0.250");
 	//addr.sin_addr.s_addr = inet_addr("192.168.0.191");
 	//addr.sin_addr.s_addr = inet_addr("192.168.43.139");
 

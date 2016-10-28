@@ -83,13 +83,13 @@ int main(int argc, char *argv)
 
 	addr.sin_family = AF_INET;
 	addr.sin_port = htons(51112);
-	addr.sin_addr.s_addr = inet_addr("192.168.1.1");
+	addr.sin_addr.s_addr = inet_addr("192.168.0.191");
                                                                                                           
 	FILE *output_file;                                                                                    	
     time_t current_time;
 	time(&current_time);
 	char output_file_name[64];
-	sprintf(output_file_name, "rzhdv_data/rzhdv_ecg_%ld.txt", current_time);
+	sprintf(output_file_name, "/root/rzhdv_data/rzhdv_ecg_%ld.dat", current_time);
                                                                                                           
 	char in_data[128];                                                                                    	
 	in_data[1] = 's';
